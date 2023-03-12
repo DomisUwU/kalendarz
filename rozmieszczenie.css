@@ -1,0 +1,89 @@
+html
+{
+    background-color: lightblue;
+    height: 80%;
+}
+body
+{
+    margin: 0%;
+    height: 100%;
+    color: #000000;
+}
+
+#kartka
+{
+    margin-top: 5%;
+    margin-left: 33%;
+    height: 98%;
+    width: 35%;
+}
+
+
+
+
+#dzien
+{
+    height: 65%;
+    width: 100%;
+}
+
+
+#dzienTygodnia
+{
+    height: 10%;
+    width: 100%;
+}
+
+
+#dzienMiesiaca
+{
+    height: 70%;
+    width: 100%;
+}
+
+#miesiac
+{
+    height: 10%;
+    width: 100%;
+}
+
+#dane
+{
+    height: 17%;
+    width: 100%;
+}
+
+#imieniny
+{
+    height: 11%;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+#dd1
+{
+    height: 100%;
+    width: 30%;
+    float: left;
+}
+
+#rok
+{
+    height: 50%;
+    width: 40%;
+    float: left;
+}
+
+#dd2
+{
+    height: 100%;
+    width: 30%;
+    float: right;
+}
+

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="rozmieszczenie.css" />
+    <link rel="stylesheet" type="text/css" href="wyglad.css" />
+    <title>Kalendarz</title>
+</head>
+<body>
+
+    <div id = "kartka">
+
+
+
+        <div id = "dane">
+            
+            <div id = "dd1">
+
+                <div id = "dzienWRoku">
+                </div>
+
+                <div id = "godzina">
+                </div>
+
+            </div>
+
+            <div id = "rok">
+            </div>
+
+            <div id = "dd2">
+
+                <div id = "dzienWRoku2">
+                </div>
+
+                <div id = "godzina2">
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div id = "dzien">
+
+            <div id = "dzienTygodnia">
+            </div>
+
+
+            <div id = "dzienMiesiaca">
+            </div>
+
+            <div id = "miesiac">
+            </div>
+
+        </div>
+
+        <div id = "imieniny">
+        </div>
+    </div>
+    
+
+
+
+</body>
+    <script>
+        
+        //aktualna data
+                const d = new Date(2023,2,19);
+                    let dzien = d.getDate();
+                    let miesiac = d.getMonth();
+                    let rok = d.getFullYear();
+                    let godziny = d.getHours();
+                    let minuty = d.getMinutes();
+                    let dzienTygodnia = d.getDay();
+        //aktualna data
+        
+        
+        function czasOd1Wydarzenia(rok)
+        {
+            const dataWydarzenia = new Date(rok, 0, 1);
+            var pozostalyCzas =  d.getTime() - dataWydarzenia.getTime();
+
+                var s = pozostalyCzas / 1000;       // sekundy
+                var min = s / 60;                   // minuty
+                var h = min / 60;                   // godziny
+                var hLeft = Math.floor(h);          // pozostało godzin
+                var days = Math.ceil(hLeft  / 24);  //zostalo dni
+                return days + 1;
+        }
+
+        function doKoncaRoku(rok, miesiac, dzien)
+        {
+            const dataWydarzenia = new Date(rok, miesiac, dzien);
+            var pozostalyCzas = dataWydarzenia.getTime() - d.getTime();
+                var s = pozostalyCzas / 1000;       // sekundy
+                var min = s / 60;                   // minuty
+                var h = min / 60;                   // godziny
+                var hLeft = Math.floor(h);          // pozostało godzin
+                var days = Math.ceil(hLeft  / 24);  //zostalo dni
+                return days;
+        }
+        
+                    var doKoncaRoku = doKoncaRoku(rok,11,31);
+
+
+                    function czasDoWydarzenia(rok, miesiac, dzien)
+                    {
+                        const dataWydarzenia = new Date(rok, miesiac, dzien);
+                        var pozostalyCzas = dataWydarzenia.getTime() - d.getTime();
+                            var s = pozostalyCzas / 1000;       // sekundy
+                            var min = s / 60;                   // minuty
+                            var h = min / 60;                   // godziny
+                            var hLeft = Math.floor(h);          // pozostało godzin
+                            var days = Math.ceil(hLeft  / 24);  //zostalo dni
+                            return days;
+                    }
+                    var doImienin = czasDoWydarzenia(rok,6,6);
+                    
+                    var imieninki = false;
+                    if (doImienin > 0)
+                    {
+                        document.getElementById("imieniny").innerHTML = "Do imienin Dominika zostało: " + doImienin + " dni.";
+                    }
+                    else if(doImienin < 0)
+                    {
+                        var bylyImieniny = doImienin + 364;
+                        document.getElementById("imieniny").innerHTML = "Do nastepnych imienin Dominika zostało: " +  bylyImieniny + " dni."; 
+                    }
+                    else if(doImienin == 0)
+                    {
+                        
+                        document.getElementById("imieniny").innerHTML = "Dzisiaj masz imieniny!";
+                        imieninki = true;
+                    }
+                    var od1stycznia = czasOd1Wydarzenia(rok);
+           
+
+                                //wiosna
+                                if(miesiac >= 2 && miesiac <= 5)
+                                {
+                                    poraRoku = "wiosna";
+                                    if(miesiac == 2 && dzien >=20)
+                                    {
+                                        poraRoku = "wiosna";
+                                    }
+                                    if(miesiac == 5 && dzien >=21)
+                                    {
+                                        poraRoku = "lato";
+                                    }
+                                }
+
+                        //lato
+                        if(miesiac > 5 && miesiac <= 8)
+                        {
+                            poraRoku = "lato";
+                            if(miesiac == 8 && dzien >=22)
+                            {
+                                poraRoku = "jesien";
+                            }
+                            
+                        }
+
+                //jesien
+                if(miesiac > 8 && miesiac <= 11)
+                {
+                    poraRoku = "jesien";
+                    if(miesiac == 11 && dzien >=21)
+                    {
+                        poraRoku = "zima";
+                    }
+                    
+                }
+        //zima
+        if(miesiac >=0  && miesiac <=2)
+        {
+            poraRoku = "zima";
+            if(miesiac == 2 && dzien <20)
+            {
+            poraRoku = "zima";
+            }
+            else
+            if(miesiac == 2 && dzien >= 20)
+            {
+            poraRoku = "wiosna";
+            }
+        }
+
+                
+
+
+        
+        switch(miesiac)
+        {
+            case 0: miesiac = "Styczeń";break;
+            case 1: miesiac = "Luty";break;
+            case 2: miesiac = "Marzec";break;
+            case 3: miesiac = "Kwiecień";break;
+            case 4: miesiac = "Maj";break;
+            case 5: miesiac = "Czerwiec";break;
+            case 6: miesiac = "Lipiec";break;
+            case 7: miesiac = "Sierpień";break;
+            case 8: miesiac = "Wrzesień";break;
+            case 9: miesiac = "Październik";break;
+            case 10: miesiac = "Listopad";break;
+            case 11: miesiac = "Grudzień";break;
+        }
+
+        switch(dzienTygodnia)
+        {
+            case 1: dzienTygodnia = "Poniedziałek";break;
+            case 2: dzienTygodnia = "Wtorek";break;
+            case 3: dzienTygodnia = "Środa";break;
+            case 4: dzienTygodnia = "Czwartek";break;
+            case 5: dzienTygodnia = "Piatek";break;
+            case 6: dzienTygodnia = "Sobota";break;
+            case 0: dzienTygodnia = "Niedziela";break;
+        }
+
+        document.getElementById("dzienWRoku").innerHTML = od1stycznia + " dzień roku";
+        document.getElementById("dzienWRoku2").innerHTML = doKoncaRoku + " dni do końca roku";
+        document.getElementById("rok").innerHTML = rok;
+        document.getElementById("dzienTygodnia").innerHTML = dzienTygodnia;
+        document.getElementById("dzienMiesiaca").innerHTML = dzien;
+        document.getElementById("miesiac").innerHTML = miesiac;
+
+
+
+        if(minuty < 10)
+        {
+            document.getElementById("godzina").innerHTML = "Godz: " + godziny + ":0" + minuty;
+            document.getElementById("godzina2").innerHTML = "Godz: " + godziny + ":0" + minuty;
+        }
+        else
+        {
+            document.getElementById("godzina").innerHTML = "Godz: " + godziny + ":" + minuty;
+            document.getElementById("godzina2").innerHTML = "Godz: " + godziny + ":" + minuty ;
+        }
+
+
+        if(dzienTygodnia == "Niedziela")
+        {
+            document.getElementById("dzienTygodnia").style.color = "red";
+        }
+        if(imieninki == false){
+            if(poraRoku == 'wiosna')
+            {
+                document.getElementById("kartka").style.boxShadow = "0px 5px 25px 20px #2dc653";
+                document.getElementById("kartka").style.border = "10px solid #25a244";
+                document.getElementById("dane").style.backgroundColor = "#25a244";
+                document.getElementById("dzien").style.backgroundImage = 'URL("https://s-trojmiasto.pl/zdj/c/n/9/3125/3000x0/3125359-Pierwszy-dzien-astronomicznej-wiosny-wypada-miedzy-19-a-21-marca.jpg")';
+            }
+
+            if(poraRoku == 'lato')
+            {
+                document.getElementById("kartka").style.boxShadow = "0px 5px 25px 20px #ff9e00";
+                document.getElementById("kartka").style.border = "10px solid #ff9100";
+                document.getElementById("dane").style.backgroundColor = "#ff9100";
+                document.getElementById("dzien").style.backgroundImage = 'URL("https://static.topagrar.pl/media/articles/IMG_1911-min.png")';
+            }
+
+            if(poraRoku == 'jesien')
+            {
+                document.getElementById("kartka").style.boxShadow = "0px 5px 25px 20px #dd4146";
+                document.getElementById("kartka").style.border = "10px solid #c71f37";
+                document.getElementById("dane").style.backgroundColor = "#c71f37";
+                document.getElementById("dzien").style.backgroundImage = 'URL("https://d-art.ppstatic.pl/kadry/k/r/1/fe/4e/5d807c46eebf7_o_large.jpg")';
+            }
+
+            if(poraRoku == 'zima')
+            {
+                document.getElementById("kartka").style.boxShadow = "0px 5px 25px 20px lightskyblue;";
+                document.getElementById("kartka").style.border = "10px solid #0b2545";
+                document.getElementById("dane").style.backgroundColor = "#0b2545";
+                document.getElementById("dzien").style.backgroundImage = 'URL("https://i.iplsc.com/pierwszy-dzien-kalendarzowej-zimy-wypada-22-grudnia/000DV22L6I42WFDO-C122-F4.jpg")';
+            }
+        }
+        else if(imieninki == true)
+        {
+                document.getElementById("kartka").style.boxShadow = "0px 5px 25px 20px #883677";
+                document.getElementById("kartka").style.border = "10px solid #EE85B5";
+                document.getElementById("dane").style.backgroundColor = "#EE85B5";
+                document.getElementById("dzien").style.backgroundImage = 'URL("https://extradania.pl/wp-content/uploads/2021/04/tort-pietrowy-z-jednorozcem.jpg ")';
+                document.getElementById("kartka").style.backgroundColor = "crucian carp";
+        }
+        
+    </script>
+</html>
